@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         gameOverText.SetActive(false);
+        gameOverText.SetActive(false);
+        UpdateScoreText();  // Update score text at the start of the game
     }
 
     // Update is called once per frame
@@ -37,12 +38,17 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore(int amount)
     {
         score += amount;
+        UpdateScoreText();
+    }
+
+    void UpdateScoreText()
+    {
         scoreText.text = "Score: " + score;
     }
+
     public void InitiateGameOver()
     {
-        
-        isGameOver= true;
+        isGameOver = true;
         gameOverText.SetActive(true);
     }
 }
