@@ -1,18 +1,18 @@
-
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] float spawnRate = 2f;
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject enemyPrefab;        // Regular enemy prefab
+    [SerializeField] GameObject specialEnemyPrefab; // Special enemy prefab
+    [SerializeField] float specialEnemySpawnChance = 0.2f; // 20% chance to spawn special enemy
 
     float xMin;
     float xMax;
     float ySpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +31,18 @@ public class Spawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        float randx = Random.Range(xMin,xMax);
-        Instantiate(enemyPrefab, new Vector3(randx, ySpawn, 0), Quaternion.identity);
+        float randx = Random.Range(xMin, xMax);
+
+        // Decide whether to spawn regular enemy or special enemy
+        if (Random.value <= specialEnemySpawnChance)
+        {
+            // Spawn special enemy
+            Instantiate(specialEnemyPrefab, new Vector3(randx, ySpawn, 0), Quaternion.identity);
+        }
+        else
+        {
+            // Spawn regular enemy
+            Instantiate(enemyPrefab, new Vector3(randx, ySpawn, 0), Quaternion.identity);
+        }
     }
-
-
 }
-
-
