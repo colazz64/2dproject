@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] GameObject gameOverText;
+    [SerializeField] private GameObject upgradeIcon;
 
     private void Awake() 
     {
@@ -24,12 +24,13 @@ public class GameManager : MonoBehaviour
     {
         gameOverText.SetActive(false);
         UpdateScoreText();  // Update score text at the start of the game
+        upgradeIcon.SetActive(false);  // Hide the upgrade icon initially
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Submit") && isGameOver)
+        if (Input.GetButtonDown("Submit") && isGameOver)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -50,5 +51,23 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         gameOverText.SetActive(true);
+    }
+
+    // Show the upgrade icon when the laser is upgraded
+    public void ShowUpgradeIcon()
+    {
+        if (upgradeIcon != null)
+        {
+            upgradeIcon.SetActive(true);  // Show the upgrade icon
+        }
+    }
+
+    // Hide the upgrade icon when the timer ends
+    public void HideUpgradeIcon()
+    {
+        if (upgradeIcon != null)
+        {
+            upgradeIcon.SetActive(false);  // Hide the upgrade icon
+        }
     }
 }

@@ -48,20 +48,14 @@ public class SpecialEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "PlayerLaser")  // Detect Player's Laser
+        if (collision.gameObject.tag == "PlayerLaser")
         {
-           
-
-            // Try to find the player and upgrade the laser
+            // Upgrade the player's laser
             Player player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Player>();
 
             if (player != null)
             {
                 player.UpgradeLaser();
-            }
-            else
-            {
-                Debug.LogWarning("Player object not found or Player script is missing.");
             }
 
             // Increase the player's score for destroying this special enemy
@@ -70,6 +64,20 @@ public class SpecialEnemy : MonoBehaviour
             // Destroy the special enemy and the player's laser
             Destroy(collision.gameObject);  // Destroy the player's laser
             Destroy(gameObject);  // Destroy the special enemy
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            // Handle player death when the player collides with the special enemy
+            GameManager.instance.InitiateGameOver();
+
+            // Destroy the player and the special enemy
+            Destroy(collision.gameObject);  // Destroy the player
+            Destroy(gameObject);  // Destroy the special enemy
+        }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            // Ignore collisions with normal enemies (do nothing)
+            Debug.Log("Special enemy collided with a normal enemy, ignoring collision.");
         }
     }
 }

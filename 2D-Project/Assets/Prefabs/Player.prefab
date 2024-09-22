@@ -106,6 +106,7 @@ MonoBehaviour:
   upgradeTimerText: {fileID: 0}
   upgradedPlayerSprite: {fileID: 21300000, guid: 963446d519b0c43b1a26e7753d0de885, type: 3}
   defaultPlayerSprite: {fileID: 21300000, guid: 12163b09c47a147a380e0f9ee057e2e6, type: 3}
+  powerupIconPrefab: {fileID: 2508569460658097016, guid: a87eac242bec94baf9250a02f47426fd, type: 3}
   laserCooldown: 0.5
 --- !u!58 &-5315034095484530978
 CircleCollider2D:
